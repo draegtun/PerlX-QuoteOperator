@@ -5,11 +5,12 @@ use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
 our $VERSION = '0.01';
-our $qtype = __PACKAGE__ . '::q';
+our $qtype = __PACKAGE__ . '::qtype';
 
 sub import {
     my ($self, $name, $param, $caller, $pkg) = @_;
     
+    # not importing unless name & parameters provided (TBD... check these)
     return unless $name && $param;
     
     # called directly and not via a PerlX::QuoteOperator::* module
@@ -42,12 +43,26 @@ sub parser {
     $self->skip_declarator;          # skip past "http"
 
     my $line = $self->get_linestr;   # get me current line of code
-    my $pos  = $self->offset;        # position just after "http"
+
+    if ( $self->{ $qtype } eq 'qw' ) {
+        # find start & end of quote operator
+        my $pos   = $self->offset;        # position just after "http"
+        my $delim = substr( $line, $pos, 1 );
+        do { $pos++ } until substr( $line, $pos, 1 ) eq $delim;
+        
+        # and wrap sub() around quote operator (needed for lists)
+        substr( $line, $pos + 1, 0 )      = ')';
+        substr( $line, $self->offset, 0 ) = '(' . $self->{ $qtype };
+        
+    }
+    else {
+        # Can rely on Perl parser for everything else (q & qq)
+        substr( $line, $self->offset, 0 ) = q{ } . $self->{ $qtype };
+    }
 
     # eg: qURL(http://www.foo.com/baz) => qURL qq(http://www.foo.com/baz)
-    substr( $line, $pos, 0 ) = q{ } . $self->{ $qtype };
-    
     # pass back to parser
+    print STDERR $line, "\n";
     $self->set_linestr( $line );
 
     return;
@@ -61,7 +76,7 @@ __END__
 
 =head1 NAME
 
-PerlX::QuoteOperator - The great new PerlX::QuoteOperator!
+PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 =head1 VERSION
 
