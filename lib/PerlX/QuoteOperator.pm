@@ -5,7 +5,8 @@ use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
 our $VERSION = '0.01';
-our $qtype = __PACKAGE__ . '::qtype';
+our $qtype  = __PACKAGE__ . '::qtype';
+our $parser = __PACKAGE__ . '::parser';
 
 sub import {
     my ($self, $name, $param, $caller) = @_;
@@ -21,14 +22,15 @@ sub import {
     
     # quote like operator to emulate.  Default is qq// unless -emulate is provided
     $self->{ $qtype } = $param->{ -emulate } || 'qq';  
+    
+    # invoke my heath robinson parser or not?  
+    # (not being... just insert quote operator and leave to Perl)
+    $self->{ $parser } = $param->{ -parser } || 0;
 
     # Create D::D trigger for $name in calling program
     Devel::Declare->setup_for(
-        $caller,
-        { 
-            $name => { 
-                const => sub { $self->parser(@_) },
-            },
+        $caller, { 
+            $name => { const => sub { $self->parser(@_) } },
         },
     );
     
@@ -43,7 +45,7 @@ sub parser {
 
     my $line = $self->get_linestr;   # get me current line of code
 
-    if ( $self->{ $qtype } eq 'qw' ) {
+    if ( $self->{ $parser } ) {
         # find start & end of quote operator
         my $pos   = $self->offset;        # position just after "http"
         my $delim = substr( $line, $pos, 1 );
@@ -55,7 +57,7 @@ sub parser {
         
     }
     else {
-        # Can rely on Perl parser for everything else (q & qq)
+        # Can rely on Perl parser for everything.. just insert quote-like operator
         substr( $line, $self->offset, 0 ) = q{ } . $self->{ $qtype };
     }
 
