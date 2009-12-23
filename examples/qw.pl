@@ -34,3 +34,15 @@ say qwucx/foo bar baz/, qw/one two three/;
 
 # because this is what it now looks like
 # say qwucx(qw/foo bar baz/), qw/one two three/;
+
+
+# lets do list to hash
+use PerlX::QuoteOperator qwHash => { 
+    -debug      => 1,
+    -emulate    => 'qw',
+    -with       => sub (@) { my $n; map { $_ => ++$n } @_ },
+};
+
+my %months = qwHash/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
+
+say $months{ Jun };

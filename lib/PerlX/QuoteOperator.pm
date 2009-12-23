@@ -90,26 +90,165 @@ Version 0.01
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+Create a quote-like operator which convert text to uppercase:
 
-Perhaps a little code snippet.
+    use PerlX::QuoteOperator quc => {
+        -emulate => 'q', 
+        -with    => sub ($) { uc $_[0] }, 
+    };
+    
+    say quc/do i have to $hout/;
+    
+    # => DO I HAVE TO $HOUT
 
-    use PerlX::QuoteOperator;
 
-    my $foo = PerlX::QuoteOperator->new();
-    ...
+=head1 DESCRIPTION
+
+=head2 QUOTE-LIKE OPERATORS
+
+Perl comes with some very handy L<quote-like operators|perlop/Quote-Like-Operators> 
+L<http://perldoc.perl.org/perlop.html#Quote-Like-Operators>  :)
+
+But what it doesn't come with is some easy method to create your own quote-like operators :(
+
+This is where PerlX::QuoteOperator comes in.  Using the fiendish L<Devel::Declare> under its hood  
+it "tricks", sorry "helps!" the perl parser to provide new first class quote-like operators.
+
+=head2 HOW DOES IT DO IT?
+
+The subterfuge doesn't go that deep.  If we take a look at the SYNOPSIS example:
+
+    say quc/do i have to $hout/;
+    
+Then all PerlX::QuoteOperator actually does is convert this to the following before perl compiles it:
+
+    say quc q/do i have to $hout/;
+    
+Where 'quc' is a defined sub expecting one argument  (ie, sub ($) { uc $_[0] }  ).
+
+This approach allows PerlX::QuoteOperator to perform the very basic keyhole surgery on the code,
+ie. just put in the emulated quote-like operator between keyword & argument.
+
+However this approach does have caveats especially when qw// is being used!.  See CAVEATS.
+There is an alternaive parser when can be invoked,  see -parser Export parameter.
+
+=head2 WHY?
+
+Bit like climbing Mount Everest... because we can!  ;-)
+
+Is really having something like:
+
+    say quc/do i have to $hout/;
+    
+so much better than:
+
+    say uc 'do i have to $hout';
+    
+or more apt this:
+
+    say uc('do i have to $hout');
+    
+Probably not... at least in the example shown.  But things like this are certainly eye catching:
+
+    use PerlX::QuoteOperator::URL 'qh';
+    
+    my $content = qh( http://transfixedbutnotdead.com );   # does HTTP request
+
+And this:
+
+    use PerlX::QuoteOperator qwHash => { 
+        -emulate    => 'qw',
+        -with       => sub (@) { my $n; map { $_ => ++$n } @_ },
+    };
+
+    my %months = qwHash/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
+
+Certainly give the code aesthetic a good pause for thought.
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+By default nothing is exported:
+
+    use PerlX::QuoteOperator;    # => imports nothing
+    
+Quote operator is imported when passed a name and options like so:
+
+    use PerlX::QuoteOperator quote_operator_name_i_want_to_use => { }   
+
+A hashref is used to pass the options.
+
+=head2 PARAMETERS
+
+=head3 -emulate
+
+Which Perl quote-like operator required to emulate.  q, qq & qw have all been tested.
+
+Default: emulates qq
+
+=head3 -with
+
+Your quote-like operator code reference / anon subroutine goes here.
+
+Remember to use subroutine prototype (if not using -parser option):
+
+    -with    => sub ($) { uc $_[0] }, 
+
+This is a mandatory parameter.
+
+=head3 -parser
+
+If set then alternative parser kicks in.   This parser currenly works on single line of code only
+and must use same delimeter for beginning and end of quote:
+
+    -parser => 1
+    
+When invoked this parser will take this:
+
+    quc/do i have to $hout/;
+
+And by finding the end of the quote will then encapulate it like so:
+
+    quc(q/do i have to $hout/);
+
+Default: Not using alternative parsing.
+
+=head3 -debug
+
+If set then prints (warn) the transmogrified line so that you can see what PerlX::QuoteOperator has done!
+
+    -debug => 1
+
+Default:  No debug.
 
 =head1 FUNCTIONS
 
 =head2 import
 
+Module import sub.
 
 =head2 parser
+
+When keyword (defined quote operator) is triggered then this sub uses L<Devel::Declare> 
+to provide necessary keyhole surgery/butchery on the code to make it valid Perl code (think Macro here!).
+
+
+=head1 CAVEATS
+
+See examples/qw.pl for some issues with creating qw based quote-like operators.
+
+The Export parameter -parser will get around some of these problems but then introduces a few new ones! (see TODO)
+
+
+=head1 SEE ALSO
+
+PerlX::QuoteOperator::*
+
+=over 4
+
+=item * L<PerlX::QuoteOperator::URL>
+
+=back
+
 
 
 =head1 AUTHOR
@@ -156,6 +295,10 @@ L<http://search.cpan.org/dist/PerlX-QuoteOperator/>
 
 
 =head1 ACKNOWLEDGEMENTS
+
+From here to oblivion!:  L<http://transfixedbutnotdead.com/2009/12/16/url-develdeclare-and-no-strings-attached/>
+
+And a round of drinks for the mad genuis of MST for creating L<Devel::Declare> in the first place!
 
 
 =head1 DISCLAIMER

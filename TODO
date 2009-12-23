@@ -30,3 +30,5 @@
   - Return object (to test)
 
 * Added import checks on parameters
+
+* Bit about API for building new quote operators (for now just look at URL.pm)

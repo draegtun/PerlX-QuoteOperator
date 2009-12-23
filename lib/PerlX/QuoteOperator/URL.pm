@@ -22,7 +22,7 @@ __END__
 
 =head1 NAME
 
-PerlX::QuoteOperator::URL - The great new PerlX::QuoteOperator!
+PerlX::QuoteOperator::URL - Quote-like operator returning http request for the URL provided.
 
 =head1 VERSION
 
@@ -30,23 +30,50 @@ Version 0.01
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
+    use PerlX::QuoteOperator::URL;
 
-Perhaps a little code snippet.
+    my $content = qURL( http://transfixedbutnotdead.com );   # does HTTP request
 
-    use PerlX::QuoteOperator;
 
-    my $foo = PerlX::QuoteOperator->new();
-    ...
+=head1 DESCRIPTION
+
+For more info see L<PerlX::QuoteOperator>.
+
+For now here is another example:
+
+    use PerlX::QuoteOperator::URL 'qh';
+    use JSON qw(decode_json);
+
+    say decode_json( qh{ http://twitter.com/statuses/show/6592721580.json } )->{text};
+
+    # => "He nose the truth."
+    
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+By default 'qURL' is exported to calling package/program.
+
+This can be changed by providing a name of your own choice:
+
+    use PerlX::QuoteOperator::URL 'q_http_request';
+    
 
 =head1 FUNCTIONS
 
 =head2 import
+
+Standard import subroutine.
+
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<PerlX::QuoteOperator>
+
+=item * L<http://transfixedbutnotdead.com/2009/12/16/url-develdeclare-and-no-strings-attached/>
+
+=back
 
 
 =head1 AUTHOR
@@ -93,6 +120,8 @@ L<http://search.cpan.org/dist/PerlX-QuoteOperator/>
 
 
 =head1 ACKNOWLEDGEMENTS
+
+Inspired by this blog post: L<http://ozmm.org/posts/urls_in_ruby.html> and wanting to learn L<Devel::Declare>
 
 
 =head1 DISCLAIMER
