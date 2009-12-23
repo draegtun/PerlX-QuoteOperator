@@ -8,10 +8,10 @@ our $VERSION = '0.01';
 our $qtype = __PACKAGE__ . '::qtype';
 
 sub import {
-    my ($self, $name, $param, $caller, $pkg) = @_;
+    my ($self, $name, $param, $caller) = @_;
     
-    # not importing unless parameters provided (TBD... check these)
-    return unless $param;
+    # not importing unless name & parameters provided (TBD... check these)
+    return unless $name && $param;
     
     # called directly and not via a PerlX::QuoteOperator::* module
     unless ($caller) {
@@ -19,11 +19,10 @@ sub import {
         $self   = __PACKAGE__->new;
     }
     
-    $self->{ $qtype } = $param->{ -emulate } || 'qq';    # default is qq//
-    
-    # use package name (last bit) if $name not given (prefixed with 'q').
-    $name ||= $self->{ $qtype } . (split '::', $pkg)[-1];
+    # quote like operator to emulate.  Default is qq// unless -emulate is provided
+    $self->{ $qtype } = $param->{ -emulate } || 'qq';  
 
+    # Create D::D trigger for $name in calling program
     Devel::Declare->setup_for(
         $caller,
         { 
