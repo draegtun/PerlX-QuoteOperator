@@ -1,0 +1,13 @@
+
+* qw uses a simple parser where as q & qq rely fully on Perl parser (ie. so no way to muck it up!)
+  
+  So at moment you cannot do:
+  
+  - Multi line qw
+  
+  - And delimiters must match exactly.. so for eg.  qw// & qw!!     qw{}, qw() & qw[] not implemented (yet)
+  
+  
+* Add -parser flag   (qw// uses this be default... but going to make it optional)
+
+* add debug flag
