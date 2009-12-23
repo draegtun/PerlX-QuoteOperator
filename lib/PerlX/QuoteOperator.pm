@@ -61,7 +61,7 @@ sub parser {
 
     # eg: qURL(http://www.foo.com/baz) => qURL qq(http://www.foo.com/baz)
     # pass back to parser
-    # dEBUG: print STDERR $line, "\n";
+    #print STDERR $line, "\n";
     $self->set_linestr( $line );
 
     return;

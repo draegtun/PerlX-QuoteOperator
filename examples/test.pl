@@ -11,8 +11,3 @@ use 5.010;
 use PerlX::QuoteOperator qwuc => { -emulate => 'qw', -with => sub (@) { @_ } };
 say qwuc/foo bar baz/, qw/one two three/;
 
-use Directory::Scratch;
-
-my $tmp = Directory::Scratch->new;
-
-say $tmp;
