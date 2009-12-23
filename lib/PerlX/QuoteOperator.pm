@@ -298,7 +298,7 @@ L<http://search.cpan.org/dist/PerlX-QuoteOperator/>
 
 From here to oblivion!:  L<http://transfixedbutnotdead.com/2009/12/16/url-develdeclare-and-no-strings-attached/>
 
-And a round of drinks for the mad genuis of MST for creating L<Devel::Declare> in the first place!
+And a round of drinks for the mad genius of MST for creating L<Devel::Declare> in the first place!
 
 
 =head1 DISCLAIMER
