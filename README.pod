@@ -15,9 +15,9 @@ Create new quote-like operators in Perl
         -emulate => 'q', 
         -with    => sub ($) { uc $_[0] }, 
     };
-
+    
     say quc/do i have to $hout/;
-
+    
     # => DO I HAVE TO $HOUT
 
 
