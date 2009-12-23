@@ -13,7 +13,7 @@ sub import {
     my $code   = sub ($) { LWP::Simple::get( $_[0] ) };
 
     my $ctx = PerlX::QuoteOperator->new;
-    $ctx->import( $name, [ 'qq', $code ], $caller, __PACKAGE__ );
+    $ctx->import( $name, { -emulate => 'qq', -with => $code }, $caller, __PACKAGE__ );
 }
 
 1;

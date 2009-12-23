@@ -10,8 +10,8 @@ our $qtype = __PACKAGE__ . '::qtype';
 sub import {
     my ($self, $name, $param, $caller, $pkg) = @_;
     
-    # not importing unless name & parameters provided (TBD... check these)
-    return unless $name && $param;
+    # not importing unless parameters provided (TBD... check these)
+    return unless $param;
     
     # called directly and not via a PerlX::QuoteOperator::* module
     unless ($caller) {
@@ -19,7 +19,7 @@ sub import {
         $self   = __PACKAGE__->new;
     }
     
-    $self->{ $qtype } = $param->[0] || 'qq';    # default is qq//
+    $self->{ $qtype } = $param->{ -emulate } || 'qq';    # default is qq//
     
     # use package name (last bit) if $name not given (prefixed with 'q').
     $name ||= $self->{ $qtype } . (split '::', $pkg)[-1];
@@ -34,7 +34,7 @@ sub import {
     );
     
     no strict 'refs';
-    *{$caller.'::'.$name} = $param->[1];
+    *{$caller.'::'.$name} = $param->{ -with };
 }
 
 sub parser {
@@ -62,7 +62,7 @@ sub parser {
 
     # eg: qURL(http://www.foo.com/baz) => qURL qq(http://www.foo.com/baz)
     # pass back to parser
-    print STDERR $line, "\n";
+    # dEBUG: print STDERR $line, "\n";
     $self->set_linestr( $line );
 
     return;
