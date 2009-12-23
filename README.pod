@@ -1,15 +1,15 @@
-PerlX::QuoteOperator
+=head1 PerlX::QuoteOperator
 
 Create new quote-like operators in Perl
 
 
-VERSION
+=head2 VERSION
 
     PerlX::QuoteOperator        0.01
     PerlX::QuoteOperator::URL   0.01
 
 
-SYNOPSIS
+=head2 SYNOPSIS
 
     use PerlX::QuoteOperator quc => {
         -emulate => 'q', 
@@ -21,7 +21,7 @@ SYNOPSIS
     # => DO I HAVE TO $HOUT
 
 
-INSTALLATION
+=head2 INSTALLATION
 
 To install this module, run the following commands:
 
@@ -31,13 +31,13 @@ To install this module, run the following commands:
 	./Build install
 
 
-DEPENDENCIES
+=head2 DEPENDENCIES
 
     Devel::Declare
     LWP::Simple         (for PerlX::QuoteOperator::URL)
     
 
-SUPPORT AND DOCUMENTATION
+=head2 SUPPORT AND DOCUMENTATION
 
 After installing, you can find documentation for this module with the
 perldoc command.
@@ -45,7 +45,7 @@ perldoc command.
     perldoc PerlX::QuoteOperator
 
 
-COPYRIGHT AND LICENCE
+=head2 COPYRIGHT AND LICENCE
 
 Copyright (C) 2009 Barry Walsh (Draegtun Systems Ltd)
 
