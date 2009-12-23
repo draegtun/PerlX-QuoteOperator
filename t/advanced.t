@@ -13,6 +13,13 @@ is_deeply [ qwuc{
     bar 
     baz}], \@list, 'advanced qw multi-line test';
 
-# multi-line would fail without -parser set
-use PerlX::QuoteOperator qwS => { -emulate => 'qw', -with => sub (@) { join q{ }, @_ }, -parser => 1 };
-is qwS/foo bar baz/, $expected, 'advanced qw multi-line parser test';
+# qw like this would fail without -parser set
+use PerlX::QuoteOperator qwS => { 
+    -emulate => 'qw', 
+    -with    => sub (@) { join q{ }, @_ }, 
+    -parser  => 1 
+};
+is qwS/foo bar baz/, $expected, 'advanced qw parser test';
+
+
+# TBD - test import() is working correctly.  Test nothing added to symbol table after a use P::QO ();

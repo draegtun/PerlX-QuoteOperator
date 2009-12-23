@@ -8,6 +8,6 @@ use 5.010;
 #use PerlX::QuoteOperator qwuc => [ qw => sub (@) { @_ } ];
 
 # new style
-use PerlX::QuoteOperator qwuc => { -emulate => 'qw', -with => sub (@) { @_ } };
-say qwuc/foo bar baz/, qw/one two three/;
+use PerlX::QuoteOperator quc => { -emulate => 'qq', -with => sub ($) { uc $_[0] } };
+say quc{this will be all in upper case};
 

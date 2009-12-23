@@ -7,6 +7,7 @@ use 5.010;
 # some qw// examples
 
 use PerlX::QuoteOperator qwuc => { 
+    -debug      => 1,
     -emulate    => 'qw', 
     -with       => sub (@) { map { uc } @_ },
 };
@@ -14,12 +15,15 @@ use PerlX::QuoteOperator qwuc => {
 # yikes.. it does qw/one two three/ as well!  
 say qwuc/foo bar baz/, qw/one two three/;
 
-# this loses qw/one two three/  :(
-my @list = (qwuc/foo bar baz/), qw/one two three/;
-say @list;
+# above doesn't work because this is the transmogrified line
+# say qwuc qw/foo bar baz/, qw/one two three/;
 
-# so in this position have to use -parser
+# so must implictly cover off the corners!
+say ((qwuc/foo bar baz/), qw/one two three/);
+
+# or enforce the -parser option
 use PerlX::QuoteOperator qwucx => { 
+    -debug      => 1,
     -emulate    => 'qw',
     -parser     => 1,
     -with       => sub (@) { map { uc } @_ },
@@ -27,3 +31,6 @@ use PerlX::QuoteOperator qwucx => {
 
 # now works as expected
 say qwucx/foo bar baz/, qw/one two three/;
+
+# because this is what it now looks like
+# say qwucx(qw/foo bar baz/), qw/one two three/;

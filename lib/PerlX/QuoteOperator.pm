@@ -5,8 +5,9 @@ use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
 our $VERSION = '0.01';
-our $qtype  = __PACKAGE__ . '::qtype';
-our $parser = __PACKAGE__ . '::parser';
+our $qtype   = __PACKAGE__ . '::qtype';
+our $parser  = __PACKAGE__ . '::parser';
+our $debug   = __PACKAGE__ . '::debug';
 
 sub import {
     my ($self, $name, $param, $caller) = @_;
@@ -24,8 +25,11 @@ sub import {
     $self->{ $qtype } = $param->{ -emulate } || 'qq';  
     
     # invoke my heath robinson parser or not?  
-    # (not being... just insert quote operator and leave to Perl)
+    # (not using parser means just insert quote operator and leave to Perl)
     $self->{ $parser } = $param->{ -parser } || 0;
+    
+    # debug or not to debug... that is the question
+    $self->{ $debug } = $param->{ -debug } || 0;
 
     # Create D::D trigger for $name in calling program
     Devel::Declare->setup_for(
@@ -63,8 +67,8 @@ sub parser {
 
     # eg: qURL(http://www.foo.com/baz) => qURL qq(http://www.foo.com/baz)
     # pass back to parser
-    #print STDERR $line, "\n";
     $self->set_linestr( $line );
+    warn "$line\n" if $self->{ $debug };
 
     return;
 }

@@ -1,13 +1,32 @@
 
-* qw uses a simple parser where as q & qq rely fully on Perl parser (ie. so no way to muck it up!)
+* parser flag   (  -parser => 1  )
+
+  This invokes the optional "heath robinson" parser!  
   
-  So at moment you cannot do:
+  This can be useful for qw// in some cases but generally you should be able to live without it.
+    
   
-  - Multi line qw
+  So at moment the -parser issues are:
+  
+  - Only parses single line.  So multi-line quote operator will fail with { -parser => 1 } is set
   
   - And delimiters must match exactly.. so for eg.  qw// & qw!!     qw{}, qw() & qw[] not implemented (yet)
   
+  See examples/qw.pl  for examples of some of the issues
   
-* Add -parser flag   (qw// uses this be default... but going to make it optional)
 
-* add debug flag
+* Some more Quote Like Operator Modules:
+
+  - List comprehension / maker 
+  
+  - JSON to Perl hashref (and visa versa)
+  
+  - List to Hash
+  
+  - DateTime
+  
+  - SQL
+  
+  - Return object (to test)
+
+* Added import checks on parameters
