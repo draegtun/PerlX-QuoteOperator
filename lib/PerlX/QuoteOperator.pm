@@ -1,6 +1,8 @@
 package PerlX::QuoteOperator;
 use strict;
 use warnings;
+use 5.008001;
+
 use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
