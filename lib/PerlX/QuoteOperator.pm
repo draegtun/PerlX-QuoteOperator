@@ -48,6 +48,7 @@ sub parser {
     my $self = shift;
     $self->init(@_);
     $self->skip_declarator;          # skip past "http"
+    $self->skipspace;
 
     my $line = $self->get_linestr;   # get me current line of code
 
