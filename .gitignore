@@ -11,3 +11,5 @@ cover_db
 .DS_Store
 pod2htmd.tmp
 pod2htmi.tmp
+MANIFEST.bak
+META.yml
