@@ -5,8 +5,8 @@ Create new quote-like operators in Perl
 
 VERSION
 
-    PerlX::QuoteOperator        0.01
-    PerlX::QuoteOperator::URL   0.01
+    PerlX::QuoteOperator        0.02
+    PerlX::QuoteOperator::URL   0.02
 
 
 SYNOPSIS
@@ -47,7 +47,7 @@ perldoc command.
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2009 Barry Walsh (Draegtun Systems Ltd)
+Copyright (C) 2009-2010 Barry Walsh (Draegtun Systems Ltd)
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

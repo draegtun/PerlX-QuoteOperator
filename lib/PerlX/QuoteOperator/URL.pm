@@ -4,7 +4,7 @@ use warnings;
 use PerlX::QuoteOperator ();
 use LWP::Simple ();
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub import {
     my ($class, $name) = @_;
@@ -26,7 +26,7 @@ PerlX::QuoteOperator::URL - Quote-like operator returning http request for the U
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -71,7 +71,11 @@ Standard import subroutine.
 
 =item * L<PerlX::QuoteOperator>
 
+=item * L<ACME::Url>
+
 =item * L<http://transfixedbutnotdead.com/2009/12/16/url-develdeclare-and-no-strings-attached/>
+
+=item * L<http://transfixedbutnotdead.com/2009/12/26/couple-of-cpan-pressies/>
 
 =back
 
@@ -93,7 +97,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc PerlX::QuoteOperator
+    perldoc PerlX::QuoteOperator::URL
 
 
 You can also look for information at:
@@ -132,7 +136,7 @@ However I accept no liability I<whatsoever> should this software do what you exp
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Barry Walsh (Draegtun Systems Ltd), all rights reserved.
+Copyright 2009-2010 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>), all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

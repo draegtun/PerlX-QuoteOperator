@@ -12,12 +12,4 @@ CVS
 .DS_Store
 pod2htmd.tmp
 pod2htmi.tmp
-blib*
-Makefile
-Makefile.old
-_build*
-pm_to_blib*
-*.tar.gz
-.lwpcookies
-PerlX-QuoteOperator-*
-cover_db
+^MYMETA.yml$

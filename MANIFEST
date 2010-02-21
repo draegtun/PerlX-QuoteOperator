@@ -2,10 +2,10 @@ Build.PL
 Changes
 examples/qw.pl
 examples/test.pl
-ignore.txt
 lib/PerlX/QuoteOperator.pm
 lib/PerlX/QuoteOperator/URL.pm
 MANIFEST
+META.yml
 README
 README.pod
 t/00-load.t
@@ -16,4 +16,3 @@ t/pod-coverage.t
 t/pod.t
 t/qo-URL.t
 TODO
-META.yml

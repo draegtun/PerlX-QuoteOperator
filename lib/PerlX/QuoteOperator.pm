@@ -6,7 +6,7 @@ use 5.008001;
 use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';
@@ -88,7 +88,7 @@ PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 
 =head1 SYNOPSIS
@@ -109,8 +109,8 @@ Create a quote-like operator which convert text to uppercase:
 
 =head2 QUOTE-LIKE OPERATORS
 
-Perl comes with some very handy L<quote-like operators|perlop/Quote-Like-Operators> 
-L<http://perldoc.perl.org/perlop.html#Quote-Like-Operators>  :)
+Perl comes with some very handy Quote-Like Operators 
+L<http://perldoc.perl.org/perlop.html#Quote-Like-Operators> :)
 
 But what it doesn't come with is some easy method to create your own quote-like operators :(
 
@@ -244,8 +244,6 @@ The Export parameter -parser will get around some of these problems but then int
 
 =head1 SEE ALSO
 
-PerlX::QuoteOperator::*
-
 =over 4
 
 =item * L<PerlX::QuoteOperator::URL>
@@ -301,7 +299,7 @@ L<http://search.cpan.org/dist/PerlX-QuoteOperator/>
 
 From here to oblivion!:  L<http://transfixedbutnotdead.com/2009/12/16/url-develdeclare-and-no-strings-attached/>
 
-And a round of drinks for the mad genius of MST for creating L<Devel::Declare> in the first place!
+And a round of drinks for the mad genius of L<MST|http://search.cpan.org/~mstrout/> for creating L<Devel::Declare> in the first place!
 
 
 =head1 DISCLAIMER
@@ -312,7 +310,7 @@ However I accept no liability I<whatsoever> should this software do what you exp
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Barry Walsh (Draegtun Systems Ltd), all rights reserved.
+Copyright 2009-2010 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>), all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
