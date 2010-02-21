@@ -3,11 +3,16 @@
 use Test::More tests => 3;
 
 use Directory::Scratch;
+use constant WIN32 => $^O eq 'MSWin32';
 
 my $tmpfile = 'qURL';
 my $tmp  = Directory::Scratch->new;
 my $file = $tmp->touch( $tmpfile, stuff() );
-my $url  = 'file://localhost' . $file;
+
+my $url  = 'file://localhost' . sub {
+    return $_[0]->as_foreign('Unix') if WIN32;
+    return $_[0]->stringify;
+}->( $file );
 
 # default test
 use PerlX::QuoteOperator::URL;
@@ -25,10 +30,10 @@ $tmp->delete( $tmpfile ) or diag "Issue removing tmp file ($file)";
 undef $tmp; # everything else is removed
 
 
-sub test_stuff { join( "\n", stuff() ) . "\n" }
+sub test_stuff { stuff() . "\n" }
 
 sub stuff {
-    (
+    join "\n", (
         "first line of data",
         "now the second line",
         "and finally the third line",
