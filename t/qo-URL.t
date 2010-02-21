@@ -9,7 +9,7 @@ my $tmpfile = 'qURL';
 my $tmp  = Directory::Scratch->new;
 my $file = $tmp->touch( $tmpfile, stuff() );
 
-my $url  = 'file://localhost' . sub {
+my $url  = 'file:' . sub {
     return $_[0]->as_foreign('Unix') if WIN32;
     return $_[0]->stringify;
 }->( $file );
