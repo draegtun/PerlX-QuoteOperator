@@ -6,7 +6,7 @@ use 5.008001;
 use Devel::Declare ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';
@@ -55,7 +55,7 @@ sub parser {
     if ( $self->{ $parser } ) {
         # find start & end of quote operator
         my $pos   = $self->offset;        # position just after "http"
-        my $delim = substr( $line, $pos, 1 );
+        my $delim = _closing_delim( substr( $line, $pos, 1 ) );
         do { $pos++ } until substr( $line, $pos, 1 ) eq $delim;
         
         # and wrap sub() around quote operator (needed for lists)
@@ -76,6 +76,12 @@ sub parser {
     return;
 }
 
+sub _closing_delim {
+    my $d = shift;
+    return ')' if $d eq '(';
+    return '}' if $d eq '{';
+    return $d;
+}
 
 1;
 
@@ -133,7 +139,7 @@ This approach allows PerlX::QuoteOperator to perform the very basic keyhole surg
 ie. just put in the emulated quote-like operator between keyword & argument.
 
 However this approach does have caveats especially when qw// is being used!.  See CAVEATS.
-There is an alternaive parser when can be invoked,  see -parser Export parameter.
+There is an alternative parser when can be invoked,  see -parser Export parameter.
 
 =head2 WHY?
 
@@ -201,7 +207,7 @@ This is a mandatory parameter.
 =head3 -parser
 
 If set then alternative parser kicks in.   This parser currenly works on single line of code only
-and must use same delimeter for beginning and end of quote:
+and must use a parenthesis, braces or same delimeter for beginning and end of quote:
 
     -parser => 1
     
@@ -234,13 +240,36 @@ Module import sub.
 When keyword (defined quote operator) is triggered then this sub uses L<Devel::Declare> 
 to provide necessary keyhole surgery/butchery on the code to make it valid Perl code (think Macro here!).
 
+=head2 _closing_delim
+
+Internal subroutine used in -parser option.
 
 =head1 CAVEATS
 
-See examples/qw.pl for some issues with creating qw based quote-like operators.
+Performing a method call or dereference using -> like below will not work:
 
-The Export parameter -parser will get around some of these problems but then introduces a few new ones! (see TODO)
+    use PerlX::QuoteOperator qurl => { 
+        -emulate => 'q', 
+        -with    => sub ($) { require URI; URI->new($_[0]) },
+    };
+    
+    qurl(http://www.google.com/)->authority;   # Throws an error
 
+Because the parsed qurl line becomes this...
+
+    qurl q(http://www.google.com/)->authority;
+
+... so throwing an error trying to call C<authority> on a string.  See "HOW DOES IT DO IT" for more info.  
+
+A workaround is to use the I<alternative> parser and the line would now be parsed like this:
+
+    qurl(q(http://www.google.com/))->authority;
+    
+See -parser option for more information.
+
+Also see examples/qw.pl for some more issues with creating qw based quote-like operators. NB. The alternative parser will get around some of these problems but then (potentially) introduces a few new ones! (see TODO)
+
+Recommendation: Stick with Perl parser and all will be fine! 
 
 =head1 SEE ALSO
 
@@ -310,7 +339,7 @@ However I accept no liability I<whatsoever> should this software do what you exp
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009-2010 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>), all rights reserved.
+Copyright 2009-2011 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>), all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

@@ -5,6 +5,7 @@ examples/test.pl
 lib/PerlX/QuoteOperator.pm
 lib/PerlX/QuoteOperator/URL.pm
 MANIFEST
+META.json
 META.yml
 README
 README.pod
@@ -12,6 +13,7 @@ t/00-load.t
 t/advanced.t
 t/basic.t
 t/boilerplate.t
+t/object_usage.t
 t/pod-coverage.t
 t/pod.t
 t/qo-URL.t

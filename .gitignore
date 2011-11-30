@@ -14,3 +14,5 @@ pod2htmi.tmp
 MANIFEST.bak
 META.yml
 MYMETA.yml
+META.json
+MYMETA.json

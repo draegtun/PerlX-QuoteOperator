@@ -1,5 +1,12 @@
 Revision history for PerlX-QuoteOperator
 
+0.03	Weds 30th November, 2011
+	* Prompted by rt72822 from TobyInkster todo:
+	  - Improved CAVEATS part of docs
+	  - Amended alternative parser to also work with () & {}
+	  - Closed - https://rt.cpan.org/Public/Bug/Display.html?id=72822
+
+
 0.02	Sat March 6, 2009
 	* Fixed qo-URL.t failing test on Windows due to issues with how I used Directory::Scratch.
 	  - Thanks to Lionel Mehl (http://search.cpan.org/~blade/) for finding and help fixing this.

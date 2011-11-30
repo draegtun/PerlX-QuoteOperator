@@ -14,7 +14,7 @@ my $builder = Module::Build->new(
     },
 
     requires => {
-        'Devel::Declare'        => 0.005011,
+        'Devel::Declare'        => 0.006007,
         'LWP::Simple'           => 0,
     },
 
