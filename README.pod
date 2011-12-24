@@ -5,8 +5,8 @@ Create new quote-like operators in Perl
 
 =head2 VERSION
 
-    PerlX::QuoteOperator        0.03
-    PerlX::QuoteOperator::URL   0.03
+    PerlX::QuoteOperator        0.04
+    PerlX::QuoteOperator::URL   0.04
 
 
 =head2 SYNOPSIS
@@ -34,6 +34,7 @@ To install this module, run the following commands:
 =head2 DEPENDENCIES
 
     Devel::Declare
+    Text::Balanced      (for alternative parser)
     LWP::Simple         (for PerlX::QuoteOperator::URL)
     
 
