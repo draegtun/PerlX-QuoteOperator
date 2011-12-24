@@ -219,7 +219,7 @@ This is a mandatory parameter.
 =head3 -parser
 
 If set then alternative parser kicks in.   This parser currenly works on single line of code only
-and must use a parenthesis, braces or same delimeter for beginning and end of quote:
+and must open/close quote with (), {}, [], <> or must have same delimeter for beginning and end of quote:
 
     -parser => 1
     
@@ -290,6 +290,11 @@ Recommendation: Stick with Perl parser and all will be fine!
 =item * L<PerlX::QuoteOperator::URL>
 
 =back
+
+
+=head1 CONTRIBUTORS
+
+Toby Inkster (L<https://metacpan.org/author/TOBYINK>) for Text::Balanced patch to the alternative parser at 0.04
 
 
 
