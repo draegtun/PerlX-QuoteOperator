@@ -15,6 +15,7 @@ my $builder = Module::Build->new(
 
     requires => {
         'Devel::Declare'        => 0.006007,
+        'Text::Balanced'        => 0,
         'LWP::Simple'           => 0,
     },
 

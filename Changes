@@ -1,5 +1,10 @@
 Revision history for PerlX-QuoteOperator
 
+0.04	Sat 24th December, 2011
+	* Added patch from TobyInkster:
+	  - Uses Text::Balanced for [], {}, <>, nesting
+	  - See: https://rt.cpan.org/Public/Bug/Display.html?id=72822
+	
 0.03	Weds 30th November, 2011
 	* Prompted by rt72822 from TobyInkster todo:
 	  - Improved CAVEATS part of docs
@@ -16,5 +21,4 @@ Revision history for PerlX-QuoteOperator
 0.01    Sat December 16, 2009
 	* First version, released on CPAN.
 	
-
 

@@ -4,9 +4,10 @@ use warnings;
 use 5.008001;
 
 use Devel::Declare ();
+use Text::Balanced ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';
@@ -54,9 +55,18 @@ sub parser {
 
     if ( $self->{ $parser } ) {
         # find start & end of quote operator
-        my $pos   = $self->offset;        # position just after "http"
-        my $delim = _closing_delim( substr( $line, $pos, 1 ) );
-        do { $pos++ } until substr( $line, $pos, 1 ) eq $delim;
+        my $pos    = $self->offset;        # position just after "http"
+        my $opener = substr( $line, $pos, 1 );
+        my $closer = _closing_delim( $opener );
+        if ($closer eq $opener) {
+            do { $pos++ } until substr( $line, $pos, 1 ) eq $closer;
+        }
+        else {
+            my $text = substr($line, $pos);
+            my ($capture, $remaining) = Text::Balanced::extract_bracketed($text, $opener);
+            $pos += length $capture;
+            $pos--;
+        }
         
         # and wrap sub() around quote operator (needed for lists)
         substr( $line, $pos + 1, 0 )      = ')';
@@ -80,6 +90,8 @@ sub _closing_delim {
     my $d = shift;
     return ')' if $d eq '(';
     return '}' if $d eq '{';
+    return ']' if $d eq '[';
+    return '>' if $d eq '<';
     return $d;
 }
 
@@ -94,7 +106,7 @@ PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 =head1 VERSION
 
-Version 0.02
+Version 0.04
 
 
 =head1 SYNOPSIS
