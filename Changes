@@ -1,6 +1,8 @@
 Revision history for PerlX-QuoteOperator
 
 {{$NEXT}}
+
+0.05  2015-02-23 17:22:12 GMT
         - Removed PerlX::QuoteOperator::URL into separate CPAN module (dist)
         - Switched to using Dist::Milla for cpan release
         - Close RT...
