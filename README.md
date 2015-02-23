@@ -245,7 +245,7 @@ However I accept no liability _whatsoever_ should this software do what you expe
 
 # COPYRIGHT & LICENSE
 
-Copyright 2009-2011 Barry Walsh (Draegtun Systems Ltd | [http://www.draegtun.com](http://www.draegtun.com)), all rights reserved.
+Copyright 2009-2015 Barry Walsh (Draegtun Systems Ltd | [http://www.draegtun.com](http://www.draegtun.com)), all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

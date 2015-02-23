@@ -1,6 +1,7 @@
 Revision history for PerlX-QuoteOperator
 
 {{$NEXT}}
+        - Fixed copyright year and released to CPAN
 
 0.05  2015-02-23 17:22:12 GMT
         - Removed PerlX::QuoteOperator::URL into separate CPAN module (dist)
