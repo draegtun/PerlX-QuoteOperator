@@ -5,8 +5,8 @@ Create new quote-like operators in Perl
 
 =head2 VERSION
 
-    PerlX::QuoteOperator        0.04
-    PerlX::QuoteOperator::URL   0.04
+    PerlX::QuoteOperator        0.05
+    PerlX::QuoteOperator::URL   0.05
 
 
 =head2 SYNOPSIS
@@ -21,21 +21,10 @@ Create new quote-like operators in Perl
     # => DO I HAVE TO $HOUT
 
 
-=head2 INSTALLATION
-
-To install this module, run the following commands:
-
-	perl Build.PL
-	./Build
-	./Build test
-	./Build install
-
-
 =head2 DEPENDENCIES
 
     Devel::Declare
     Text::Balanced      (for alternative parser)
-    LWP::Simple         (for PerlX::QuoteOperator::URL)
     
 
 =head2 SUPPORT AND DOCUMENTATION
@@ -48,7 +37,7 @@ perldoc command.
 
 =head2 COPYRIGHT AND LICENCE
 
-Copyright (C) 2009-2011 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>)
+Copyright (C) 2009-2015 Barry Walsh (Draegtun Systems Ltd | L<http://www.draegtun.com>)
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
