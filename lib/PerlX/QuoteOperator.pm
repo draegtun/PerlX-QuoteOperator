@@ -7,7 +7,7 @@ use Devel::Declare ();
 use Text::Balanced ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';

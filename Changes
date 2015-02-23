@@ -1,6 +1,8 @@
 Revision history for PerlX-QuoteOperator
 
 {{$NEXT}}
+
+0.06  2015-02-23 18:06:26 GMT
         - Fixed copyright year and released to CPAN
 
 0.05  2015-02-23 17:22:12 GMT
