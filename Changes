@@ -1,5 +1,12 @@
 Revision history for PerlX-QuoteOperator
 
+{{$NEXT}}
+        - Removed PerlX::QuoteOperator::URL into separate CPAN module (dist)
+        - Switched to using Dist::Milla for cpan release
+        - Close RT...
+            - https://rt.cpan.org/Public/Bug/Display.html?id=81393
+            - https://rt.cpan.org/Public/Bug/Display.html?id=81392
+
 0.04	Sat 24th December, 2011
 	* Added patch from TobyInkster:
 	  - Uses Text::Balanced for [], {}, <>, nesting

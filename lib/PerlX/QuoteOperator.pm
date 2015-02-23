@@ -7,7 +7,7 @@ use Devel::Declare ();
 use Text::Balanced ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';
@@ -106,7 +106,7 @@ PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 
 =head1 SYNOPSIS
@@ -174,6 +174,8 @@ Probably not... at least in the example shown.  But things like this are certain
     use PerlX::QuoteOperator::URL 'qh';
     
     my $content = qh( http://transfixedbutnotdead.com );   # does HTTP request
+
+NOTICE - As for version 0.05 (23rd Feb 2015), PerlX::QuoteOperator::URL was moved to its own distribution.
 
 And this:
 
