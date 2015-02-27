@@ -306,10 +306,7 @@ Barry Walsh, C<< <draegtun at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-perlx-quoteoperator at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=PerlX-QuoteOperator>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
+Please report any bugs or feature requests to L<https://github.com/draegtun/PerlX-QuoteOperator/issues>
 
 
 
@@ -324,7 +321,7 @@ You can also look for information at:
 
 =over 4
 
-=item * Git issues for bugs/sugs
+=item * Github issues & push requests
 
 L<https://github.com/draegtun/PerlX-QuoteOperator/issues>
 
@@ -343,6 +340,7 @@ L<http://cpanratings.perl.org/d/PerlX-QuoteOperator>
 =item * Search CPAN
 
 L<http://search.cpan.org/dist/PerlX-QuoteOperator/>
+L<https://metacpan.org/pod/PerlX::QuoteOperator/>
 
 =back
 
