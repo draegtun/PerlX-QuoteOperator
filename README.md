@@ -4,7 +4,7 @@ PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 # VERSION
 
-Version 0.05
+Version 0.07
 
 # SYNOPSIS
 
@@ -215,7 +215,11 @@ You can find documentation for this module with the perldoc command.
 
 You can also look for information at:
 
-- RT: CPAN's request tracker
+- Git issues for bugs/sugs
+
+    [https://github.com/draegtun/PerlX-QuoteOperator/issues](https://github.com/draegtun/PerlX-QuoteOperator/issues)
+
+- Old resolved bugs can be found on RT: CPAN's request tracker
 
     [http://rt.cpan.org/NoAuth/Bugs.html?Dist=PerlX-QuoteOperator](http://rt.cpan.org/NoAuth/Bugs.html?Dist=PerlX-QuoteOperator)
 
