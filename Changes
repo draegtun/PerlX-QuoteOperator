@@ -1,6 +1,8 @@
 Revision history for PerlX-QuoteOperator
 
 {{$NEXT}}
+
+0.08  2015-04-02 19:52:41 BST
         - Added section to pod that shows how to create your own module
           defining a custom quote operator.
           (Neil Bowers : https://github.com/draegtun/PerlX-QuoteOperator/pull/2)
