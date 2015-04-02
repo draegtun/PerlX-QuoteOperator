@@ -285,6 +285,52 @@ Also see examples/qw.pl for some more issues with creating qw based quote-like o
 
 Recommendation: Stick with Perl parser and all will be fine! 
 
+=head1 WRITING A QUOTE OPERATOR MODULE
+
+This section shows how you can create a module that
+defines a custom quote operator,
+if you have one that you want to re-use.
+
+Let's say you want a C<qROT13> operator,
+which will L<ROT13|http://en.wikipedia.org/wiki/ROT13> a string.
+First, here's a simple rot13 function.
+Look at the <wikipedia page on rot13|http://en.wikipedia.org/wiki/ROT13>
+if you're not familiar with rot13:
+
+ my $rot13 = sub ($) {
+     my $string = shift;
+     $string =~ y/A-Za-z/N-ZA-Mn-za-m/;
+     return $string;
+ };
+
+You don't create your module as a subclass of C<PerlX::QuoteOperator>,
+but your module creates an instance of it, then calls its C<import()>
+method, passing an additional final argument,
+which specifies the name of the package
+that the operator should be imported into.
+
+Leaving out the rot13 function for ease of reading,
+here's a module which defines the operator:
+
+ package PerlX::QuoteOperator::Rot13;
+ use PerlX::QuoteOperator ();
+ sub import
+ {
+     my $class     = shift;
+     my $name      = @_ > 0 ? shift : 'qROT13';
+     my $export_to = caller();
+     my $pqo       = PerlX::QuoteOperator->new();
+
+     $pqo->import($name, { -emulate => 'qq', -with => $rot13 }, $export_to);
+ }
+ 1;
+
+You can now use your module as follows:
+
+ use PerlX::QuoteOperator::Rot13;
+ my $string = qROT13|This is a string|;
+ print "string = '$string'\n";
+
 =head1 SEE ALSO
 
 =over 4
