@@ -7,7 +7,7 @@ use Devel::Declare ();
 use Text::Balanced ();
 use base 'Devel::Declare::Context::Simple';
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 our $qtype   = __PACKAGE__ . '::qtype';
 our $parser  = __PACKAGE__ . '::parser';
 our $debug   = __PACKAGE__ . '::debug';
@@ -106,7 +106,7 @@ PerlX::QuoteOperator - Create new quote-like operators in Perl
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 
 =head1 SYNOPSIS
